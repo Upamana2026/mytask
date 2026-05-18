@@ -22,15 +22,15 @@ import {
 // ============================================
 // Firebase 設定 — Firebase Console からコピーした値に差し替えてください
 // ============================================
-  const firebaseConfig = {
-    apiKey: "AIzaSyBwtrCaA4PlPL75O9oIPBtMrwW8f5bx9gM",
-    authDomain: "task-9d954.firebaseapp.com",
-    projectId: "task-9d954",
-    storageBucket: "task-9d954.firebasestorage.app",
-    messagingSenderId: "987206541441",
-    appId: "1:987206541441:web:536acef0bc593bce85ad80",
-    measurementId: "G-GNQZP3K4KW",
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBwtrCaA4PlPL75O9oIPBtMrwW8f5bx9gM",
+  authDomain: "task-9d954.firebaseapp.com",
+  projectId: "task-9d954",
+  storageBucket: "task-9d954.firebasestorage.app",
+  messagingSenderId: "987206541441",
+  appId: "1:987206541441:web:536acef0bc593bce85ad80",
+  measurementId: "G-GNQZP3K4KW",
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
