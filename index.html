@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>タスク管理アプリ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ログイン画面 -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <h1>タスク管理</h1>
+      <p>Googleアカウントでログインすると<br />PC・スマホで同じデータをリアルタイム同期できます</p>
+      <button id="google-signin" class="btn-google">
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.1 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.6 8.3 6.3 14.7z"/>
+          <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.5-5.2l-6.2-5.2C29.3 35 26.8 36 24 36c-5.2 0-9.6-3.3-11.2-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+          <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.2 5.2c-.4.4 6.7-4.9 6.7-14.9 0-1.3-.1-2.4-.4-3.5z"/>
+        </svg>
+        <span>Googleでログイン</span>
+      </button>
+      <p class="login-note" id="login-error"></p>
+    </div>
+  </div>
+
+  <!-- アプリ本体 -->
+  <div id="app" class="app hidden">
+    <header class="app-header">
+      <div class="header-top">
+        <h1>タスク管理</h1>
+        <div class="user-info">
+          <img id="user-avatar" alt="" />
+          <span id="user-name"></span>
+          <button id="sign-out" class="btn-signout">ログアウト</button>
+        </div>
+      </div>
+      <nav class="tabs">
+        <button class="tab active" data-tab="active-page">タスク</button>
+        <button class="tab" data-tab="archive-page">完了済みタスク</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- タスクページ -->
+      <section id="active-page" class="page active">
+        <form id="task-form" class="task-form">
+          <h2>新しいタスクを追加</h2>
+          <label>
+            <span>タイトル</span>
+            <input type="text" name="title" required placeholder="例: 報告書作成" />
+          </label>
+          <label>
+            <span>内容</span>
+            <textarea name="content" rows="3" placeholder="タスクの詳細を入力"></textarea>
+          </label>
+          <label>
+            <span>期日</span>
+            <input type="date" name="dueDate" />
+          </label>
+          <label>
+            <span>関連リンクURL</span>
+            <input type="url" name="link" placeholder="https://example.com" />
+          </label>
+          <button type="submit" class="btn-primary">追加</button>
+        </form>
+
+        <h2 class="section-title">タスク一覧 <span id="sync-indicator" class="sync-indicator">同期中</span></h2>
+        <ul id="active-list" class="task-list"></ul>
+        <p id="active-empty" class="empty-msg">タスクはありません。</p>
+      </section>
+
+      <!-- 完了済みタスクページ -->
+      <section id="archive-page" class="page">
+        <h2 class="section-title">完了済みタスク(新しい順)</h2>
+        <ul id="archive-list" class="task-list stack"></ul>
+        <p id="archive-empty" class="empty-msg">完了済みタスクはありません。</p>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

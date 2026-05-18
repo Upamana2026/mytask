@@ -1,0 +1,561 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Yu Gothic UI", "Meiryo", sans-serif;
+  background: #f5f6fa;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ===== ログイン画面 ===== */
+.login-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 16px;
+  z-index: 100;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-card h1 {
+  margin: 0 0 12px;
+  font-size: 1.6rem;
+  color: #2c3e50;
+}
+
+.login-card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.btn-google {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  color: #3c4043;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.btn-google:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+}
+
+.login-note {
+  color: #d63031;
+  font-size: 0.85rem;
+  margin: 16px 0 0;
+  min-height: 1.2em;
+}
+
+/* ===== アプリヘッダー ===== */
+.app-header {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  padding: 20px 24px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+.user-info img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  object-fit: cover;
+}
+
+.btn-signout {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-signout:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.sync-indicator {
+  font-size: 0.75rem;
+  font-weight: normal;
+  margin-left: 12px;
+  color: #999;
+  vertical-align: middle;
+}
+
+.sync-indicator.connected {
+  color: #27ae60;
+}
+
+.sync-indicator.error {
+  color: #d63031;
+}
+
+.sync-indicator.connecting {
+  color: #f39c12;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.tab.active {
+  background: #f5f6fa;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.task-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 28px;
+}
+
+.task-form h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+.task-form label {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.task-form label span {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.task-form input,
+.task-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.task-form input:focus,
+.task-form textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.btn-primary {
+  background: #667eea;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #5568d3;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e1e4e8;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list.stack {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.task-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.task-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.task-item.archived {
+  background: #eef0f5;
+  opacity: 0.85;
+}
+
+.task-checkbox {
+  margin-top: 4px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: #667eea;
+}
+
+.task-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-title {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.task-item.archived .task-title {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.task-content {
+  margin: 0 0 8px;
+  color: #555;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: #666;
+}
+
+.task-meta a {
+  color: #667eea;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.task-meta a:hover {
+  text-decoration: underline;
+}
+
+.due-date.overdue {
+  color: #d63031;
+  font-weight: 600;
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  align-self: flex-start;
+}
+
+.btn-delete:hover {
+  color: #d63031;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #999;
+  padding: 24px;
+  font-size: 0.9rem;
+}
+
+.empty-msg.hidden {
+  display: none;
+}
+
+/* ===== 完了演出 ===== */
+.celebration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.celebration-piece {
+  position: absolute;
+  font-size: 28px;
+  will-change: transform, opacity;
+  user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* 花びら: ふわふわ落下しながら回転 */
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift, 80px), 110vh, 0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.piece-petal {
+  animation: petal-fall var(--duration, 5s) ease-in forwards;
+}
+
+/* 蝶: 横切りながら上下に揺れる */
+@keyframes butterfly-fly {
+  0% {
+    transform: translate3d(-15vw, 0, 0) rotate(-10deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(25vw, -8vh, 0) rotate(10deg);
+  }
+  50% {
+    transform: translate3d(55vw, 5vh, 0) rotate(-10deg);
+  }
+  75% {
+    transform: translate3d(80vw, -6vh, 0) rotate(10deg);
+  }
+  100% {
+    transform: translate3d(115vw, 0, 0) rotate(-10deg);
+    opacity: 0;
+  }
+}
+
+@keyframes wing-flap {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.6);
+  }
+}
+
+.piece-butterfly {
+  animation: butterfly-fly var(--duration, 6s) ease-in-out forwards;
+}
+
+.piece-butterfly span {
+  display: inline-block;
+  animation: wing-flap 0.25s ease-in-out infinite;
+}
+
+/* ミツバチ: ジグザグに飛ぶ */
+@keyframes bee-buzz {
+  0% {
+    transform: translate3d(-10vw, 50vh, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: translate3d(20vw, 30vh, 0);
+  }
+  40% {
+    transform: translate3d(40vw, 60vh, 0);
+  }
+  60% {
+    transform: translate3d(60vw, 25vh, 0);
+  }
+  80% {
+    transform: translate3d(85vw, 55vh, 0);
+  }
+  100% {
+    transform: translate3d(115vw, 40vh, 0);
+    opacity: 0;
+  }
+}
+
+.piece-bee {
+  animation: bee-buzz var(--duration, 4s) linear forwards;
+}
+
+.piece-bee span {
+  display: inline-block;
+  animation: wing-flap 0.12s ease-in-out infinite;
+}
+
+/* 青い鳥: 大きく弧を描いて飛ぶ */
+@keyframes bird-blue {
+  0% {
+    transform: translate3d(-15vw, 70vh, 0) rotate(-5deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(50vw, 15vh, 0) rotate(0deg) scale(1.1);
+  }
+  100% {
+    transform: translate3d(115vw, 30vh, 0) rotate(5deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.piece-bird-blue {
+  font-size: 40px;
+  animation: bird-blue var(--duration, 5s) ease-in-out forwards;
+  color: #4a90e2;
+}
+
+/* 白い鳥: 逆方向に弧を描く */
+@keyframes bird-white {
+  0% {
+    transform: translate3d(115vw, 60vh, 0) rotate(5deg) scale(0.8) scaleX(-1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(50vw, 20vh, 0) rotate(0deg) scale(1.1) scaleX(-1);
+  }
+  100% {
+    transform: translate3d(-15vw, 35vh, 0) rotate(-5deg) scale(0.9) scaleX(-1);
+    opacity: 0;
+  }
+}
+
+.piece-bird-white {
+  font-size: 40px;
+  animation: bird-white var(--duration, 5.5s) ease-in-out forwards;
+}
+
+/* 中央のキラッと光るフラッシュ */
+@keyframes burst {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
+.celebration-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 230, 150, 0.6) 0%,
+    rgba(255, 200, 220, 0.3) 50%,
+    transparent 70%
+  );
+  animation: burst 1.2s ease-out forwards;
+}
