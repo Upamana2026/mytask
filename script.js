@@ -3,6 +3,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -61,11 +63,31 @@ const archiveEmpty = document.getElementById("archive-empty");
 // ============================================
 // 認証
 // ============================================
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+getRedirectResult(auth).catch((e) => {
+  loginError.textContent = "ログインに失敗しました: " + e.message;
+});
+
 signInBtn.addEventListener("click", async () => {
   loginError.textContent = "";
   try {
-    await signInWithPopup(auth, provider);
+    if (isIOS) {
+      await signInWithRedirect(auth, provider);
+    } else {
+      await signInWithPopup(auth, provider);
+    }
   } catch (e) {
+    if (e.code === "auth/popup-blocked" || e.code === "auth/popup-closed-by-user") {
+      try {
+        await signInWithRedirect(auth, provider);
+        return;
+      } catch (e2) {
+        loginError.textContent = "ログインに失敗しました: " + e2.message;
+        return;
+      }
+    }
     loginError.textContent = "ログインに失敗しました: " + e.message;
   }
 });
