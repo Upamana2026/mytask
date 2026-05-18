@@ -65,6 +65,8 @@ const archiveEmpty = document.getElementById("archive-empty");
 // ============================================
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
   (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const isStandalone = window.matchMedia("(display-mode: standalone)").matches ||
+  window.navigator.standalone === true;
 
 getRedirectResult(auth).catch((e) => {
   loginError.textContent = "ログインに失敗しました: " + e.message;
@@ -72,8 +74,10 @@ getRedirectResult(auth).catch((e) => {
 
 signInBtn.addEventListener("click", async () => {
   loginError.textContent = "";
+  // iOS Safari(ブラウザ)はリダイレクト方式、それ以外(PC/iOS PWA/Android)はポップアップ方式
+  const useRedirect = isIOS && !isStandalone;
   try {
-    if (isIOS) {
+    if (useRedirect) {
       await signInWithRedirect(auth, provider);
     } else {
       await signInWithPopup(auth, provider);
